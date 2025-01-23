@@ -64,11 +64,13 @@ Election Dashboard
 |----------|
 | ![SAD](report_images/voterpanel.png) <br> ![SAD](report_images/voterpanel%201.png) |
 
-**5. Group Contribution**
 <br><br>
+
+**5. Group Contribution**
+<br>
 
 | **Name** | **Contribution** |
 |----------|------------------|
-| Nur Athisha Binti Mohd Zariman (2118676)|Phase 1 <br>- registerCandidate <br>- registerVoter <br>- castVote <br>- getResultsByArea <br>- Manage validation rules, compile and testing smart contract <br><br>Phase 2 <br>-Backend <br>-Frontend (Make everything functional)|
-| Nuur Nadheerah Binti Mohammad Lutfi (2117898)|Phase 1 <br>- candidatesByArea <br>- areaVoteCount <br>- voters <br>- Use Case Diagram <br><br>Phase 2 <br>-Design frontend <br>-CSS |
-| Nur Huda Binti Eshaifol Azam (2111994)|Phase 1 <br>- startVoting <br>- endVoting <br>- getCandidatesByArea <br>- System Architecture Diagram <br><br>Phase 2 <br>-Unit Testing <br>-Report | 
+| Nur Athisha Binti Mohd Zariman (2118676)|Phase 1 <br><br>- registerCandidate <br>- registerVoter <br>- castVote <br>- getResultsByArea <br>- Manage validation rules, compile and testing smart contract <br><br>Phase 2 <br><br>-Backend <br>-Frontend (Make everything functional)|
+| Nuur Nadheerah Binti Mohammad Lutfi (2117898)|Phase 1 <br><br>- candidatesByArea <br>- areaVoteCount <br>- voters <br>- Use Case Diagram <br><br>Phase 2 <br><br>-Design frontend <br>-CSS |
+| Nur Huda Binti Eshaifol Azam (2111994)|Phase 1 <br><br>- startVoting <br>- endVoting <br>- getCandidatesByArea <br>- System Architecture Diagram <br><br>Phase 2 <br><br>-Unit Testing <br>-Report | 
