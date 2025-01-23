@@ -5,7 +5,15 @@ Prepared by Nur Athisha Binti Mohd Zariman (2118676), Nuur Nadheerah Binti Moham
 
 </p><br>
 
-**1. Frontend**
+**1. Use Case Diagram**
+![use case](report_images/usecase.png)
+<br><br>
+
+**2. System Architecture Diagram**
+![SAD](report_images/SAD.jpg)
+<br><br>
+
+**3. Frontend**
 <br>
 The frontend is developed using React.js, CSS and HTML providing an interactive and user-friendly interface for both voters and admins. It integrates seamlessly with the Ethereum blockchain through MetaMask and Ethers.js. <br><br>
 
@@ -16,15 +24,22 @@ The frontend is developed using React.js, CSS and HTML providing an interactive 
 
 <br><br>
 
-**2. Frontend Interface**
+**4. Frontend Interface**
 <br>
 
 Main Page
 <br>
 
-| <br> | <br> |
+| **Main Page** | **Election Result** |
 |----------|------------------|
-| **Login Page** <br> <img width="276" alt="Screenshot 2024-06-26 at 11 05 09 PM" src="https://github.com/Tayloresha/Bingsu_GroupProject/assets/162477571/56c5c696-3990-4b29-8e45-04a4da218f94">|**Register page** <br> <img width="276" alt="Screenshot 2024-06-26 at 11 05 22 PM" src="https://github.com/Tayloresha/Bingsu_GroupProject/assets/162477571/55918f8d-72a9-416b-a5e9-28fcd4eb93d3">|
+| ![SAD](report_images/SAD.jpg) | ![SAD](report_images/SAD.jpg)|
+
+Admin Dashboard
+<br>
+
+| **Candidates Page** | **Candidates Page** |
+|----------|------------------|
+| ![SAD](report_images/adminpanel.png) <br> ![SAD](report_images/adminpanel 1.png) <br> ![SAD](report_images/adminpanel 2.png) | ![SAD](report_images/candidatespage.png) <br> ![SAD](report_images/candidatespage 1.png) <br> ![SAD](report_images/candidatespage 2.png)|
 
 SCHEDULE
 <br>
