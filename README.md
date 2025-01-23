@@ -32,14 +32,15 @@ Main Page
 
 | **Main Page** | **Election Result** |
 |----------|------------------|
-| ![SAD](report_images/SAD.jpg) | ![SAD](report_images/SAD.jpg)|
+| ![SAD](report_images/mainpage.png) | ![SAD](report_images/mainpage%20result.png)|
 
 Admin Dashboard
 <br>
 
 | **Candidates Page** | **Candidates Page** |
 |----------|------------------|
-| ![SAD](report_images/adminpanel.png) <br> ![SAD](report_images/adminpanel 1.png) <br> ![SAD](report_images/adminpanel 2.png) | ![SAD](report_images/candidatespage.png) <br> ![SAD](report_images/candidatespage 1.png) <br> ![SAD](report_images/candidatespage 2.png)|
+| ![SAD](report_images/adminpanel.png) | ![SAD](report_images/candidatespage.png)|
+| ![SAD](report_images/adminpanel%201.png) | ![SAD](report_images/candidatespage%201.png) |
 
 SCHEDULE
 <br>
