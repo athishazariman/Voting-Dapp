@@ -2,13 +2,14 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { BrowserProvider, Contract } from "ethers";
 import { CONTRACT_ADDRESS, ABI } from "../constants";
+import Navbar from "./Navbar";
+import "../index.css";
 
 function AdminPanel({ account }) {
   const navigate = useNavigate();
-  const [votingStatus, setVotingStatus] = useState(""); // Updated to manage conditional status messages
-  const [errorMessage, setErrorMessage] = useState(""); // To display error messages for admin actions
+  const [votingStatus, setVotingStatus] = useState(""); 
+  const [errorMessage, setErrorMessage] = useState("");
 
-  // Function to get the contract instance
   const getContract = async () => {
     if (!window.ethereum) {
       throw new Error("MetaMask is not installed.");
@@ -19,14 +20,13 @@ function AdminPanel({ account }) {
     return new Contract(CONTRACT_ADDRESS, ABI, signer);
   };
 
-  // Start Voting
   const startVoting = async () => {
     try {
       const contract = await getContract();
       const tx = await contract.startVoting();
       await tx.wait();
-      setErrorMessage(""); // Clear error message
-      checkVotingStatus(); // Update status after action
+      setErrorMessage(""); 
+      checkVotingStatus();
       alert("Voting has started!");
     } catch (error) {
       console.error("Error starting voting:", error);
@@ -34,14 +34,13 @@ function AdminPanel({ account }) {
     }
   };
 
-  // End Voting
   const endVoting = async () => {
     try {
       const contract = await getContract();
       const tx = await contract.endVoting();
       await tx.wait();
-      setErrorMessage(""); // Clear error message
-      checkVotingStatus(); // Update status after action
+      setErrorMessage(""); 
+      checkVotingStatus();
       alert("Voting has ended!");
     } catch (error) {
       console.error("Error ending voting:", error);
@@ -49,16 +48,14 @@ function AdminPanel({ account }) {
     }
   };
 
-  // Check Voting Status
   const checkVotingStatus = async () => {
     try {
       const contract = await getContract();
       const votingStarted = await contract.votingStarted();
       const votingEnded = await contract.votingEnded();
 
-      // Set voting status based on the conditions
       if (!votingStarted && !votingEnded) {
-        setVotingStatus(""); // Don't display anything
+        setVotingStatus(""); 
       } else if (votingStarted && !votingEnded) {
         setVotingStatus("Voting has started.");
       } else if (votingStarted && votingEnded) {
@@ -70,37 +67,20 @@ function AdminPanel({ account }) {
     }
   };
 
-  // Fetch initial voting status
   useEffect(() => {
     checkVotingStatus();
   }, []);
 
   return (
     <div style={styles.container}>
-      {/* Header */}
-      <header style={styles.navbar}>
+      <Navbar /> {/* Use Navbar here */}
+      <div style={styles.content}>
+        {/* Logo above Admin Dashboard */}
         <div style={styles.logoContainer}>
           <img src="/logo.png" alt="Logo" style={styles.logo} />
-          <span style={styles.logoTitle}>Admin Dashboard</span>
         </div>
-        <nav style={styles.navLinks}>
-          <span style={styles.navItem} onClick={() => navigate("/")}>
-            Main Page
-          </span>
-          <span style={styles.navItem} onClick={() => navigate("/admin/candidates")}>
-            Candidates
-          </span>
-          <span style={styles.navItem} onClick={() => navigate("/admin/voters")}>
-            Voters
-          </span>
-          <span style={styles.navItem} onClick={() => navigate("/admin")}>
-            Voting Status
-          </span>
-        </nav>
-      </header>
 
-      {/* Content */}
-      <div style={styles.content}>
+        <h1 style={styles.pageTitle}>ADMIN DASHBOARD</h1>
         <p style={styles.address}>
           <strong>Your Address:</strong> {account}
         </p>
@@ -112,12 +92,14 @@ function AdminPanel({ account }) {
             End Voting
           </button>
         </div>
+
         {votingStatus && (
           <div style={styles.statusSection}>
             <h2 style={styles.statusTitle}>Voting Status</h2>
             <p style={styles.statusText}>{votingStatus}</p>
           </div>
         )}
+
         {errorMessage && <p style={styles.error}>{errorMessage}</p>}
       </div>
     </div>
@@ -126,46 +108,11 @@ function AdminPanel({ account }) {
 
 const styles = {
   container: {
-    backgroundColor: "#D5B4F2",
+    backgroundImage: "linear-gradient(135deg, #D5B4F2, #9C27B0)",
     height: "100vh",
     display: "flex",
     flexDirection: "column",
     fontFamily: "'Roboto', sans-serif",
-  },
-  navbar: {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    backgroundColor: "#5A00A6", // Darker purple for the header
-    padding: "10px 20px",
-    color: "#FFF",
-    boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-  },
-  logoContainer: {
-    display: "flex",
-    alignItems: "center",
-    gap: "10px",
-  },
-  logo: {
-    width: "50px",
-    height: "50px",
-    borderRadius: "50%", // Make the logo round
-    objectFit: "cover",
-  },
-  logoTitle: {
-    fontSize: "1.8rem",
-    fontWeight: "bold",
-  },
-  navLinks: {
-    display: "flex",
-    gap: "20px",
-  },
-  navItem: {
-    fontSize: "1.2rem",
-    fontWeight: "bold",
-    color: "#FFF",
-    cursor: "pointer",
-    transition: "color 0.3s ease",
   },
   content: {
     display: "flex",
@@ -173,13 +120,32 @@ const styles = {
     alignItems: "center",
     justifyContent: "center",
     flexGrow: 1,
-    padding: "20px",
+    padding: "30px 40px",
     textAlign: "center",
+    backgroundImage: "linear-gradient(135deg, #D5B4F2, #9C27B0)",
+    borderRadius: "15px",
   },
-  address: {
-    fontSize: "1rem",
+  logoContainer: {
+    marginBottom: "20px", // Space between the logo and the title
+  },
+  logo: {
+    width: "140px", // Adjust the size of the logo
+    height: "140px",
+    borderRadius: "50%",
+    objectFit: "cover",
+  },
+  pageTitle: {
+    fontSize: "2.4rem",
+    fontWeight: "bold",
     color: "#4B0082",
     marginBottom: "20px",
+    textShadow: "2px 2px 4px rgba(0, 0, 0, 0.3)",
+  },
+  address: {
+    fontSize: "1.1rem",
+    color: "#4B0082",
+    marginBottom: "20px",
+    fontWeight: "bold",
   },
   controlSection: {
     display: "flex",
@@ -196,7 +162,6 @@ const styles = {
     border: "none",
     cursor: "pointer",
     boxShadow: "0px 8px 15px rgba(0, 0, 0, 0.2)",
-    transition: "all 0.3s ease",
   },
   statusSection: {
     textAlign: "center",

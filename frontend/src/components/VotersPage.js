@@ -1,10 +1,10 @@
+// VotersPage.js
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { BrowserProvider, Contract } from "ethers";
 import { CONTRACT_ADDRESS, ABI } from "../constants";
+import Navbar from "./Navbar"; // Import Navbar
 
 function VotersPage({ account }) {
-  const navigate = useNavigate();
   const [newVoter, setNewVoter] = useState({
     address: "",
     nationalID: "",
@@ -13,14 +13,12 @@ function VotersPage({ account }) {
   const [message, setMessage] = useState("");
   const [voters, setVoters] = useState([]);
 
-  // Function to get the contract instance
   const getContract = async () => {
     const provider = new BrowserProvider(window.ethereum);
     const signer = await provider.getSigner();
     return new Contract(CONTRACT_ADDRESS, ABI, signer);
   };
 
-  // Register a new voter
   const registerVoter = async () => {
     try {
       const contract = await getContract();
@@ -34,8 +32,8 @@ function VotersPage({ account }) {
         text: "Voter registered successfully!",
         type: "success",
       });
-      setNewVoter({ address: "", nationalID: "", votingArea: "" }); // Reset form
-      fetchVoters(); // Refresh voters list
+      setNewVoter({ address: "", nationalID: "", votingArea: "" });
+      fetchVoters();
     } catch (error) {
       console.error("Error registering voter:", error);
       setMessage({
@@ -45,7 +43,6 @@ function VotersPage({ account }) {
     }
   };
 
-  // Fetch all registered voters
   const fetchVoters = async () => {
     try {
       const contract = await getContract();
@@ -76,37 +73,18 @@ function VotersPage({ account }) {
 
   return (
     <div style={styles.container}>
-      {/* Header */}
-      <header style={styles.navbar}>
-        <div style={styles.logoContainer}>
-          <img src="/logo.png" alt="Logo" style={styles.logo} />
-          <span style={styles.logoTitle}>Admin Dashboard</span>
-        </div>
-        <nav style={styles.navLinks}>
-          <span style={styles.navItem} onClick={() => navigate("/")}>
-            Main Page
-          </span>
-          <span style={styles.navItem} onClick={() => navigate("/admin/candidates")}>
-            Candidates
-          </span>
-          <span style={styles.navItem} onClick={() => navigate("/admin/voters")}>
-            Voters
-          </span>
-          <span style={styles.navItem} onClick={() => navigate("/admin")}>
-            Voting Status
-          </span>
-        </nav>
-      </header>
+      <Navbar /> {/* Use Navbar component here */}
 
       {/* Content */}
       <div style={styles.content}>
-        <h2 style={styles.sectionTitle}>Register Voter</h2>
+        <h1 style={styles.pageTitle}>Voter Registration</h1>
+
         <div style={styles.form}>
           <div style={styles.inputGroup}>
             <label style={styles.label}>Voter Address</label>
             <input
               type="text"
-              placeholder="0x123..."
+              placeholder="Enter Voter Address"
               value={newVoter.address}
               onChange={(e) => setNewVoter({ ...newVoter, address: e.target.value })}
               style={styles.input}
@@ -149,25 +127,31 @@ function VotersPage({ account }) {
         )}
 
         <h2 style={styles.sectionTitle}>Registered Voters</h2>
-        <table style={styles.table}>
-          <thead>
-            <tr>
-              <th style={styles.tableHeader}>Address</th>
-              <th style={styles.tableHeader}>National ID</th>
-              <th style={styles.tableHeader}>Voting Area</th>
-            </tr>
-          </thead>
-          <tbody>
-            {voters.map((voter, index) => (
-              <tr key={index} style={styles.tableRow}>
-                <td style={styles.tableCell}>{voter.address}</td>
-                <td style={styles.tableCell}>{voter.nationalID}</td>
-                <td style={styles.tableCell}>{voter.votingArea}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
 
+        {voters.length > 0 ? (
+          <table style={styles.table}>
+            <thead>
+              <tr>
+                <th style={styles.tableHeader}>Index</th>
+                <th style={styles.tableHeader}>Address</th>
+                <th style={styles.tableHeader}>National ID</th>
+                <th style={styles.tableHeader}>Voting Area</th>
+              </tr>
+            </thead>
+            <tbody>
+              {voters.map((voter, index) => (
+                <tr key={index} style={styles.tableRow}>
+                  <td style={styles.tableCell}>{index + 1}</td>
+                  <td style={styles.tableCell}>{voter.address}</td>
+                  <td style={styles.tableCell}>{voter.nationalID}</td>
+                  <td style={styles.tableCell}>{voter.votingArea}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        ) : (
+          <p style={styles.noVotersMessage}>No voters registered yet.</p> 
+        )}
       </div>
     </div>
   );
@@ -175,58 +159,29 @@ function VotersPage({ account }) {
 
 const styles = {
   container: {
-    backgroundColor: "#D5B4F2",
+    backgroundImage: "linear-gradient(135deg, #D5B4F2, #9C27B0)",
     height: "100vh",
     display: "flex",
     flexDirection: "column",
     fontFamily: "'Roboto', sans-serif",
   },
-  navbar: {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    backgroundColor: "#5A00A6",
-    padding: "10px 20px",
-    color: "#FFF",
-    boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-  },
-  logoContainer: {
-    display: "flex",
-    alignItems: "center",
-    gap: "10px",
-  },
-  logo: {
-    width: "50px",
-    height: "50px",
-    borderRadius: "50%",
-    objectFit: "cover",
-  },
-  logoTitle: {
-    fontSize: "1.8rem",
-    fontWeight: "bold",
-  },
-  navLinks: {
-    display: "flex",
-    gap: "20px",
-  },
-  navItem: {
-    fontSize: "1.2rem",
-    fontWeight: "bold",
-    color: "#FFF",
-    cursor: "pointer",
-    transition: "color 0.3s ease",
-  },
   content: {
-    flexGrow: 1,
-    padding: "20px",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+    justifyContent: "center",
+    flexGrow: 1,
+    padding: "30px 40px",
+    textAlign: "center",
+    backgroundImage: "linear-gradient(135deg, #D5B4F2, #9C27B0)",
+    borderRadius: "15px",
   },
-  sectionTitle: {
-    fontSize: "1.8rem",
+  pageTitle: {
+    fontSize: "2.4rem",
+    fontWeight: "bold",
     color: "#4B0082",
     marginBottom: "20px",
+    textShadow: "2px 2px 4px rgba(0, 0, 0, 0.3)",
   },
   form: {
     display: "flex",
@@ -263,37 +218,46 @@ const styles = {
     cursor: "pointer",
     transition: "background-color 0.3s ease",
   },
+  sectionTitle: {
+    fontSize: "2rem",
+    fontWeight: "bold",
+    color: "#4B0082",
+    margin: "20px 0",
+  },
+  message: {
+    fontSize: "1rem",
+    fontWeight: "bold",
+    padding: "10px",
+    borderRadius: "5px",
+    marginTop: "15px",
+  },
   table: {
     width: "100%",
-    maxWidth: "800px", // Center the table and limit the width
-    margin: "20px auto", // Add spacing from other elements
     borderCollapse: "collapse",
-    backgroundColor: "#FFF", // White background for contrast
-    borderRadius: "8px",
-    overflow: "hidden",
-    boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)", // Subtle shadow for a professional look
+    marginTop: "20px",
+    boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
   },
   tableHeader: {
-    backgroundColor: "#731EBE", // Match the button color
-    color: "#FFF", // White text for better contrast
-    textAlign: "center",
+    padding: "12px 15px",
+    backgroundColor: "#5A00A6",
+    color: "#FFF",
     fontWeight: "bold",
-    padding: "10px",
+    textAlign: "left",
   },
   tableRow: {
-    textAlign: "center",
-    borderBottom: "1px solid #DDD", // Subtle row separation
+    backgroundColor: "#F5F5F5",
+    transition: "background-color 0.3s ease",
   },
   tableCell: {
-    padding: "10px",
-    fontSize: "1rem",
-    color: "#4B0082", // Text color to match the theme
+    padding: "12px 15px",
+    borderBottom: "1px solid #ddd",
   },
-  
-  message: {
-    marginTop: "20px",
-    fontSize: "1rem",
+  noVotersMessage: {
+    fontSize: "1.2rem",
     fontWeight: "bold",
+    color: "#9C27B0",
+    marginTop: "20px",
+    fontStyle: "italic",
   },
 };
 
