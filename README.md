@@ -6,10 +6,12 @@ Prepared by Nur Athisha Binti Mohd Zariman (2118676), Nuur Nadheerah Binti Moham
 </p><br>
 
 **1. Use Case Diagram**
+<br>
 ![use case](report_images/usecase.png)
 <br><br>
 
 **2. System Architecture Diagram**
+<br>
 ![SAD](report_images/SAD.jpg)
 <br><br>
 
@@ -34,13 +36,28 @@ Main Page
 |----------|------------------|
 | ![SAD](report_images/mainpage.png) | ![SAD](report_images/mainpage%20result.png)|
 
+| **Main Page** |
+|----------|
+| ![SAD](report_images/mainpage.png) |
+
+| **Election Result** |
+|------------------|
+| ![SAD](report_images/mainpage%20result.png)|
+
 Admin Dashboard
 <br>
 
-| **Candidates Page** | **Candidates Page** |
+| **Admin Panel Page** | **Candidates Page** |
 |----------|------------------|
-| ![SAD](report_images/adminpanel.png) | ![SAD](report_images/candidatespage.png)|
-| ![SAD](report_images/adminpanel%201.png) | ![SAD](report_images/candidatespage%201.png) |
+| ![SAD](report_images/adminpanel.png) <br> ![SAD](report_images/adminpanel%201.png) <br> ![SAD](report_images/adminpanel%202.png) | ![SAD](report_images/candidatespage.png) <br> ![SAD](report_images/candidatespage%201.png) <br> ![SAD](report_images/candidatespage%202.png) |
+
+| **Admin Panel Page** |
+|----------|------------------|
+| ![SAD](report_images/adminpanel.png) <br> ![SAD](report_images/adminpanel%201.png) <br> ![SAD](report_images/adminpanel%202.png) |
+
+| **Candidates Page** |
+|----------|------------------|
+|  ![SAD](report_images/candidatespage.png) <br> ![SAD](report_images/candidatespage%201.png) <br> ![SAD](report_images/candidatespage%202.png) |
 
 SCHEDULE
 <br>
